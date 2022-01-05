@@ -1,0 +1,29 @@
+.App {
+  width: 100%;
+  text-align: center;
+  background-color: rgb(1,4,9);
+  min-height: 100vh;
+  min-width: 100vw;
+  font-size: calc(8px + 2vmin);
+}
+
+.secondaryBackground {
+  background-color: rgb(22,27,34) !important
+}
+
+.repoCard {
+  background-color: rgb(13,17,23) !important;
+  border: 1px solid rgb(48,54,61)
+}
+
+.textColor {
+  color: rgb(240,246,252);
+}
+
+.repoCardContent {
+  color: rgb(171,209,217);
+}
+
+.App-link {
+  color: #61dafb;
+}
