@@ -6,10 +6,8 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-
-
-
+import { Button } from '@material-ui/core'
+import { Alert } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -18,29 +16,17 @@ const Search = styled('div')(({ theme }) => ({
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
-    marginLeft: 0,
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
         width: 'auto',
     },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
@@ -53,26 +39,64 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar(props) {
-    const { onChange, onSubmit, value } = props
+    const { onSubmit, user, repo, quickSearch, onChangeRepo, onChangeUser, statusCode } = props
 
     return (
         <AppBar position="static" className="secondaryBackground" >
             <Toolbar>
                 <Search className="textColor">
-                    <SearchIconWrapper>
-                        <SearchIcon />
-                    </SearchIconWrapper>
                     <form onSubmit={onSubmit}>
                         <StyledInputBase
-                            placeholder="Search…"
+                            placeholder="Username"
                             inputProps={{ 'aria-label': 'search' }}
-                            onChange={onChange}
-                            value={value}
+                            onChange={onChangeUser}
+                            value={user}
                         />
                     </form>
                 </Search>
-                <Typography className="textColor">Github Repository Comparison Tool</Typography>
+                <Typography
+                    variant="h3"
+                    className="textColor"
+                    sx={{ padding: 1 }}
+                >
+                    /
+                </Typography>
+                <Search className="textColor">
+                    <form onSubmit={onSubmit}>
+                        <StyledInputBase
+                            placeholder="Repository"
+                            inputProps={{ 'aria-label': 'search' }}
+                            onChange={onChangeRepo}
+                            value={repo}
+                        />
+                    </form>
+                </Search>
+                <Typography
+                    variant="h4"
+                    className="textColor"
+                    sx={{ paddingLeft: 2, display: { xs: "none", md: 'none', lg: 'block' } }}
+                >
+                    Github Repository Inspection Tool
+                </Typography>
+                <Typography
+                    variant="h4"
+                    className="textColor"
+                    sx={{ paddingLeft: 2, display: { sm: 'block', lg: "none" } }}
+                >
+                    GRIT
+                </Typography>
+                <Button onClick={quickSearch}>
+                    <Typography
+                        variant="h7"
+                        className="textColor"
+                        sx={{ paddingLeft: 2, display: { xs: 'none', sm: 'block' } }}
+                    >
+                        Populate
+                    </Typography>
+                </Button>
             </Toolbar>
+            {statusCode === 404 ? <Alert variant="filled" severity="error">Something went wrong! Please check the username and repository</Alert> : ""}
+            {/* {statusCode === 404 ? <Alert variant="filled" severity="warning">This is a warning alert — check it out!</Alert> : ""} */}
         </AppBar>
     );
 }
