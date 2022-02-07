@@ -85,15 +85,6 @@ export default function SearchAppBar(props) {
                 >
                     GRIT
                 </Typography>
-                <Button onClick={quickSearch}>
-                    <Typography
-                        variant="h7"
-                        className="textColor"
-                        sx={{ paddingLeft: 2, display: { xs: 'none', sm: 'block' } }}
-                    >
-                        Populate
-                    </Typography>
-                </Button>
             </Toolbar>
             {statusCode === 404 ? <Alert variant="filled" severity="error">Something went wrong! Please check the username and repository</Alert> : ""}
             {/* {statusCode === 404 ? <Alert variant="filled" severity="warning">This is a warning alert — check it out!</Alert> : ""} */}

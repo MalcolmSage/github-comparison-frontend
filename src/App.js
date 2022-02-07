@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './styles/App.css'
-import { Box } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 
 
@@ -86,7 +86,7 @@ class App extends Component {
       
   }
 
-  quickSearch = () => {
+  componentDidMount = (event) => {
     const { repoSearches } = this.state
     let repos = []
     repoSearches.forEach((item) => {
@@ -106,7 +106,16 @@ class App extends Component {
     })
   }
 
+  removeRepo = (index) =>{
+    let newArray = this.state.arrayOfRepositories
+    newArray.splice(index, 1);
+    this.setState({
+      arrayOfRepositories: newArray
+    })
+  }
+
   render() {
+
     return (
       <Box className="App">
         <SearchAppBar statusCode={this.state.statusCode} quickSearch={this.quickSearch} style={useStyles} onChangeUser={this.onChangeUser} onChangeRepo={this.onChangeRepo} onSubmit={this.onSubmit} user={this.state.user} repo={this.state.repo} />
@@ -117,7 +126,7 @@ class App extends Component {
           >
             {this.state.arrayOfRepositories.map((item) => (
               <Grid item xs={12} md={4} key={item.id}>
-                <Repo item={item} />
+                <Repo item={item} arrayOfRepositories={this.state.arrayOfRepositories} removeRepo={this.removeRepo}/>
               </Grid>
             ))}
           </Grid>
