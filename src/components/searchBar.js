@@ -6,7 +6,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import { Button } from '@material-ui/core'
 import { Alert } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
@@ -39,7 +38,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar(props) {
-    const { onSubmit, user, repo, quickSearch, onChangeRepo, onChangeUser, statusCode } = props
+    const { onSubmit, user, repo, onChangeRepo, onChangeUser, statusCode } = props
 
     return (
         <AppBar position="static" className="secondaryBackground" >

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './styles/App.css'
-import { Box, Button } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 
 

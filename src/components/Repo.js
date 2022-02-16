@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import { Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { StarFillIcon, IssueOpenedIcon, RepoForkedIcon, EyeIcon } from '@primer/octicons-react'
+import { StarFillIcon, IssueOpenedIcon, RepoForkedIcon } from '@primer/octicons-react'
 const Repo = (props) => {
   const { item, arrayOfRepositories, removeRepo } = props
   const itemIndex = arrayOfRepositories.indexOf(item)
