@@ -13,7 +13,8 @@
 
 .repoCard {
   background-color: rgb(13,17,23) !important;
-  border: 1px solid rgb(48,54,61)
+  border: 1px solid rgb(48,54,61);
+  height: 25rem
 }
 
 .textColor {
@@ -26,4 +27,8 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.testColor {
+  background-color: rgb(22,27,34) !important
 }

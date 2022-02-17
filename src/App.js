@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './styles/App.css'
-import { Box } from '@material-ui/core'
+import { Button, Box } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 
 
@@ -29,7 +29,7 @@ class App extends Component {
       user: "",
       repo: "",
       statusCode: "",
-      repoSearches: ['facebook/react', 'angular/angular.js', 'emberjs/ember.js'],
+      repoSearches: ['facebook/react', 'angular/angular.js', 'emberjs/ember.js', 'feathericons/feather', 'tabler/tabler-icons', 'vkarampinis/awesome-icons', 'vorillaz/devicons', 'icons8/line-awesome', 'leungwensen/svg-icon'],
       arrayOfRepositories: [],
     }
   }
@@ -51,39 +51,39 @@ class App extends Component {
         // Authorization: 'token '
       }
     })
-    .then(response => {
-      // console.log(response)
-      if (response.status === 404) {
-        // console.log("404")
-        this.setState({
-          statusCode: 404
-        })
-      } else if (response.status === 200){
-        this.setState({
-          statusCode: 200
-        })
-        return response.json()
-      } else {
-        this.setState({
-          statusCode: 201
-        })
-        return false
-      }
-    })
-    .then(data => {
-      if (this.state.statusCode === 200) {
-        // console.log(this.state.statusCode)
-        let currentRepo = data
-        let newArray = this.state.arrayOfRepositories
-        newArray.push(currentRepo)
-        this.setState({
-          user: "",
-          repo: "",
-          arrayOfRepositories: newArray,
-        })
-      }
-    })
-      
+      .then(response => {
+        // console.log(response)
+        if (response.status === 404) {
+          // console.log("404")
+          this.setState({
+            statusCode: 404
+          })
+        } else if (response.status === 200) {
+          this.setState({
+            statusCode: 200
+          })
+          return response.json()
+        } else {
+          this.setState({
+            statusCode: 201
+          })
+          return false
+        }
+      })
+      .then(data => {
+        if (this.state.statusCode === 200) {
+          // console.log(this.state.statusCode)
+          let currentRepo = data
+          let newArray = this.state.arrayOfRepositories
+          newArray.push(currentRepo)
+          this.setState({
+            user: "",
+            repo: "",
+            arrayOfRepositories: newArray,
+          })
+        }
+      })
+
   }
 
   componentDidMount = (event) => {
@@ -94,6 +94,7 @@ class App extends Component {
       fetch(url, {
         headers: {
           Accept: 'application/vnd.github.v3+json',
+          Authorization: process.env.REACT_APP_AUTH_KEY
         }
       })
         .then(response => response.json())
@@ -104,9 +105,10 @@ class App extends Component {
           })
         })
     })
+
   }
 
-  removeRepo = (index) =>{
+  removeRepo = (index) => {
     let newArray = this.state.arrayOfRepositories
     newArray.splice(index, 1);
     this.setState({
@@ -114,19 +116,34 @@ class App extends Component {
     })
   }
 
+  clearList = () => {
+    this.setState({
+      user: "",
+      repo: "",
+      statusCode: "",
+      arrayOfRepositories: [],
+    })
+  }
   render() {
 
     return (
       <Box className="App">
         <SearchAppBar statusCode={this.state.statusCode} quickSearch={this.quickSearch} style={useStyles} onChangeUser={this.onChangeUser} onChangeRepo={this.onChangeRepo} onSubmit={this.onSubmit} user={this.state.user} repo={this.state.repo} />
+          <Grid container justifyContent="flex-start" direction="row">
+            <Grid item xs={2}>
+              <Button onClick={() => this.clearList()} color="success" variant="contained">
+                Clear
+              </Button>
+            </Grid>
+          </Grid>
         <Container sx={{ paddingTop: 2 }} maxWidth="xl">
           <Grid
             container
             spacing={2}
           >
             {this.state.arrayOfRepositories.map((item) => (
-              <Grid item xs={12} md={4} key={item.id}>
-                <Repo item={item} arrayOfRepositories={this.state.arrayOfRepositories} removeRepo={this.removeRepo}/>
+              <Grid item xs={12} md={4} key={item.id} sx={{ height: "5rem" }}>
+                <Repo item={item} arrayOfRepositories={this.state.arrayOfRepositories} removeRepo={this.removeRepo} />
               </Grid>
             ))}
           </Grid>
