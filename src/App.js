@@ -29,6 +29,7 @@ class App extends Component {
       user: "",
       repo: "",
       statusCode: "",
+      sorted: "",
       repoSearches: ['facebook/react', 'angular/angular.js', 'emberjs/ember.js'],
       arrayOfRepositories: [],
     }
@@ -115,7 +116,6 @@ class App extends Component {
       arrayOfRepositories: newArray
     })
   }
-
   clearList = () => {
     this.setState({
       user: "",
@@ -124,18 +124,51 @@ class App extends Component {
       arrayOfRepositories: [],
     })
   }
+  sortList = (property) => {
+    let newArray = this.state.arrayOfRepositories
+    if (this.state.sorted === property) {
+      newArray.sort((a, b) => (a[property] > b[property] ? 1 : -1))
+      this.setState({
+        arrayOfRepositories: newArray,
+        sorted: ""
+
+      })
+    } else if (this.state.sorted !== property) {
+      newArray.sort((a, b) => (a[property] < b[property] ? 1 : -1))
+      this.setState({
+        arrayOfRepositories: newArray,
+        sorted: property
+      })
+    }
+
+  }
   render() {
 
     return (
       <Box className="App">
         <SearchAppBar statusCode={this.state.statusCode} quickSearch={this.quickSearch} style={useStyles} onChangeUser={this.onChangeUser} onChangeRepo={this.onChangeRepo} onSubmit={this.onSubmit} user={this.state.user} repo={this.state.repo} />
-          <Grid container justifyContent="flex-start" direction="row">
-            <Grid item xs={2}>
-              <Button onClick={() => this.clearList()} color="success" variant="contained">
-                Clear
-              </Button>
-            </Grid>
+        <Grid container justifyContent="flex-start" direction="row" spacing={2}>
+          <Grid item xs={3}>
+            <Button onClick={() => this.sortList("stargazers_count")} variant="contained">
+              Stars
+            </Button>
           </Grid>
+          <Grid item xs={3}>
+            <Button onClick={() => this.sortList("open_issues_count")} variant="contained">
+              Issues
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button onClick={() => this.sortList("forks")} variant="contained">
+              Forks
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button onClick={() => this.clearList()} variant="contained">
+              Clear
+            </Button>
+          </Grid>
+        </Grid>
         <Container sx={{ paddingTop: 2 }} maxWidth="xl">
           <Grid
             container

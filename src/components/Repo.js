@@ -3,7 +3,6 @@ import '../styles/App.css'
 import numeral from 'numeral'
 
 import LanguagesChart from './languagesChart'
-
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
@@ -100,49 +99,3 @@ class Repo extends Component {
   }
   
 export default Repo
-
-// const Repo = (props) => {
-//   const { item, arrayOfRepositories, removeRepo } = props
-  
-//   let url = `https://api.github.com/repos/${item}`
-
-
-//   return (
-//     <Card className="repoCard">
-//       <CardContent className="repoCardContent">
-//         <Grid container justifyContent="space-between">
-//           <Grid item xs={12} >
-//             <Grid container justifyContent="space-between">
-//               <Grid item xs={12}>
-//                 {item.full_name}
-//               </Grid>
-//               <Grid item>
-//                 <Grid container>
-//                   <Grid item>
-//                     <Button onClick={() => removeRepo(itemIndex)}>
-//                       Remove
-//                     </Button>
-//                   </Grid>
-//                 </Grid>
-//               </Grid>
-//             </Grid>
-//           </Grid>
-//           <Grid item>
-//             <StarFillIcon verticalAlign="unset" />{numeral(item.stargazers_count).format('0a')}
-//           </Grid>
-//           <Grid item>
-//             <IssueOpenedIcon verticalAlign="unset" />{numeral(item.open_issues_count).format('0a')}
-//           </Grid>
-//           <Grid item>
-//             <RepoForkedIcon verticalAlign="unset" />{numeral(item.forks).format('0a')}
-//           </Grid>
-//           <Grid item xs={12}>
-//             <LanguagesChart item={item} />
-//           </Grid>
-//         </Grid>
-//       </CardContent>
-//     </Card>
-//   )
-// }
-
-// export default Repo
