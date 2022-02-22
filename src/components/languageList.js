@@ -50,7 +50,6 @@ export default function LanguagesList(props) {
     const { languages } = props
     const keyList = Object.keys(languages)
     const sumValues = obj => Object.values(obj).reduce((a, b) => a + b);
-    keyList.forEach(item => console.log(color[keyList.indexOf(item)]))
     function languagePercent() {
         return keyList.map((item) => (
             <Grid item xs={6} md={4}>

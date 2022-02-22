@@ -29,7 +29,7 @@ class App extends Component {
       user: "",
       repo: "",
       statusCode: "",
-      repoSearches: ['facebook/react', 'angular/angular.js', 'emberjs/ember.js', 'feathericons/feather', 'tabler/tabler-icons', 'vkarampinis/awesome-icons', 'vorillaz/devicons', 'icons8/line-awesome', 'leungwensen/svg-icon'],
+      repoSearches: ['facebook/react', 'angular/angular.js', 'emberjs/ember.js'],
       arrayOfRepositories: [],
     }
   }
